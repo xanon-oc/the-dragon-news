@@ -6,8 +6,12 @@ import { Button, Nav, Navbar } from "react-bootstrap";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const NavigationBar = () => {
-  const { user } = useContext(AuthContext);
-
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((error) => console.log(error));
+  };
   return (
     <Container>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -29,7 +33,9 @@ const NavigationBar = () => {
               )}
               <Nav.Link eventKey={2} href="#memes">
                 {user ? (
-                  <Button variant="dark">Logout</Button>
+                  <Button onClick={handleLogOut} variant="dark">
+                    Logout
+                  </Button>
                 ) : (
                   <Link to="/login">
                     <Button variant="dark">Login</Button>
